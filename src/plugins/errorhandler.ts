@@ -2,7 +2,7 @@ import { FastifyInstance } from 'fastify'
 
 export async function errorHandlerPlugin(app: FastifyInstance) {
   app.setErrorHandler((error, request, reply) => {
-    // Error dari validasi schema
+    
     if ((error as any).validation) {
       const validationErrors = (error as any).validation.map((err: any) => {
         const field =
@@ -30,7 +30,7 @@ export async function errorHandlerPlugin(app: FastifyInstance) {
       })
     }
 
-    // Error lain
+    
     reply.status(error.statusCode || 500).send({
       statusCode: error.statusCode || 500,
       message: error.message || 'Terjadi kesalahan pada server'

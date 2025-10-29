@@ -1,10 +1,8 @@
 import Fastify from 'fastify'
-import { userRoutes } from './modules/user/user.route.js'
 import { errorHandlerPlugin } from './plugins/errorhandler.js'
-
-import { authRoutes } from './modules/oauth2/auth.route.js'
 import jwtPlugin from './plugins/jwt.js'
 import { swaggerPlugin } from './plugins/swagger.js'
+import { allRoutes } from './routes/index.js'
 
 const app = Fastify({
     logger: true
@@ -14,9 +12,7 @@ await swaggerPlugin(app)
 
 app.register(errorHandlerPlugin)
 app.register(jwtPlugin)
-
-app.register(userRoutes, { prefix: '/api/users'})
-app.register(authRoutes)
+app.register(allRoutes)
 
 app.ready(() => {
     app.swagger()
