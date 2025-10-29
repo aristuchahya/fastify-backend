@@ -1,7 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import { prisma } from "../../../utils/prisma.js";
 import bcrypt from "bcrypt";
-import { id } from "zod/locales";
 
 
 
@@ -35,6 +34,7 @@ export async function createUser(req: FastifyRequest<{Body: {name: string, email
             data: {
                 id: createdUser.id,
                 name: createdUser.name,
+                role: createdUser.role,
                 email: createdUser.email
             }
         })

@@ -2,7 +2,9 @@ import Fastify from 'fastify'
 import { errorHandlerPlugin } from './plugins/errorhandler.js'
 import jwtPlugin from './plugins/jwt.js'
 import { swaggerPlugin } from './plugins/swagger.js'
-import { allRoutes } from './routes/index.js'
+import { allRoutes } from './modules/routes/index.js'
+import cloudinary from "fastify-cloudinary"
+import fastifyMultipart from "@fastify/multipart" 
 
 const app = Fastify({
     logger: true
@@ -12,7 +14,16 @@ await swaggerPlugin(app)
 
 app.register(errorHandlerPlugin)
 app.register(jwtPlugin)
-app.register(allRoutes)
+app.register(fastifyMultipart, {
+    attachFieldsToBody: false, 
+  limits: {
+    fileSize: 10 * 1024 * 1024,
+  },
+})
+app.register(cloudinary, {
+    url: String(process.env.CLOUDINARY_URL)
+})
+app.register(allRoutes, { prefix: '/api' })
 
 app.ready(() => {
     app.swagger()

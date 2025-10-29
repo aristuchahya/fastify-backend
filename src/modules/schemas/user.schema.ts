@@ -1,7 +1,6 @@
 import { FastifySchema } from "fastify";
 
 
-
 export const registerSchema : FastifySchema = {
     tags: ["User"],
     body: {
@@ -24,6 +23,7 @@ export const registerSchema : FastifySchema = {
                 data: {
                 id: { type: 'string' },
                 name: { type: 'string' },
+                role: { type: 'string' },
                 email: { type: 'string' }
                 }
                 
@@ -37,6 +37,7 @@ export const registerSchema : FastifySchema = {
                 data: {
                 id: { type: 'string' },
                 name: { type: 'string' },
+                role: { type: 'string' },
                 email: { type: 'string' }
                 }
             }
@@ -88,9 +89,9 @@ export const getAllUserSchema : FastifySchema = {
                 properties: {
                 status: { type: 'string' },
                 data: {
-                id: { type: 'string' },
-                name: { type: 'string' },
-                email: { type: 'string' }
+                    id: { type: 'string' },
+                    name: { type: 'string' },
+                    email: { type: 'string' }
                 }
             }
             }
