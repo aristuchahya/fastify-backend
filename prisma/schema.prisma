@@ -18,7 +18,88 @@ model User {
   id String @id @default(cuid())
   email String @unique
   name String?
+  role Role @default(CASHIER)
   password String
+
+  Sales Sales[] @relation(fields: [], references: [])
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+}
+
+model Product {
+  id String @id @default(cuid())
+  name String
+  category String 
+  price Float
+  photo String?
+  stock Int
+  SaleItems SaleItems[] @relation(fields: [], references: [])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Customer {
+  id String @id @default(cuid())
+  name String
+  phone String
+  Sales Sales[] @relation(fields: [], references: [])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Sales {
+  id String @id @default(cuid())
+  totalAmount Float
+  paymentMethod Payments
+  transactionDate DateTime
+
+  userId String
+  user User @relation(fields: [userId], references: [id])
+  customerId String?
+  customer Customer? @relation(fields: [customerId], references: [id])
+  SaleItems SaleItems[] @relation(fields: [], references: [])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SaleItems {
+  id String @id @default(cuid())
+  quantity Int
+  price Float
+  subTotal Float
+  saleId String
+  sales Sales @relation(fields: [saleId], references: [id])
+  productId String
+  product Product @relation(fields: [productId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+}
+
+model MonthlyReport {
+  id String @id @default(cuid())
+  month Int 
+  year Int
+  totalSales Float
+  totalTransactions Int
+  totalItemsSold Int
+  generatedAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+
+enum Role {
+  CASHIER
+  ADMIN
+}
+
+enum Payments {
+  QRIS
+  CASH
+  DEBIT
+  WALLET
 }

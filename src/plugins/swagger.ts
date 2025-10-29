@@ -26,6 +26,18 @@ export async function swaggerPlugin(app: FastifyInstance){
                 {
                     name: 'User',
                     description: 'User routes'
+                },
+                {
+                    name: 'Product',
+                    description: 'Product routes'
+                },
+                {
+                    name: 'Sale',
+                    description: 'Sale routes'
+                },
+                {
+                    name: 'Customer',
+                    description: 'Customer routes'
                 }
             ],
             components: {

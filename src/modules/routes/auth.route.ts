@@ -1,8 +1,8 @@
 import { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify'
-import { githubCallback } from './auth.controller.js'
+import { githubCallback } from '../controllers/auth.controller.js'; 
 import fastifyOauth2 from '@fastify/oauth2';
-import { loginSchema, registerSchema } from '../user/user.schema.js';
-import { createUser, loginUser } from '../user/user.controller.js';
+import { loginSchema, registerSchema } from '../schemas/user.schema.js';
+import { createUser, loginUser } from '../controllers/user.controller.js';
 
 export async function authRoutes(app: FastifyInstance) {
   app.register(fastifyOauth2, {

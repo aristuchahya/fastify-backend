@@ -27,18 +27,7 @@ export const githubCallback = async (req: FastifyRequest, reply: FastifyReply) =
 
   const primaryEmail = emails.find((e: any) => e.primary)?.email || user.email;
 
-  // const existingUser = await prisma.user.findUnique({
-  //   where: {
-  //     email: primaryEmail
-  //   }
-  // })
-  
-  // if (!existingUser) {
-  //   return reply.send({
-  //     status: "error",
-  //     message: "User not found"
-  //   })
-  // }
+
 
   const userInfo = {
     id: user.id,

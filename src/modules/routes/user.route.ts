@@ -1,6 +1,6 @@
 import { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify'
 
-import { getUsers, getUser } from './user.controller.js'
+import { getUsers, getUser } from '../controllers/user.controller.js'
 
 
 export async function userRoutes(app: FastifyInstance) {
