@@ -38,6 +38,10 @@ export async function swaggerPlugin(app: FastifyInstance){
                 {
                     name: 'Customer',
                     description: 'Customer routes'
+                },
+                {
+                    name: 'Report',
+                    description: 'Report routes'
                 }
             ],
             components: {

@@ -11,6 +11,38 @@ class SalesController {
             data: sale
         })
     }
+
+    async getAll(req: FastifyRequest, reply: FastifyReply) {
+        const sales = await salesService.getAllSales()
+
+        return reply.code(200).send({
+            status: 'success',
+            data: sales
+        })
+    }
+
+    async getSale(req: FastifyRequest<{Params: {id: string}}>, reply: FastifyReply) {
+        const {id} = req.params
+
+        const sale = await salesService.getSale(id)
+        
+
+        return reply.code(200).send({
+            status: 'success',
+            data: sale
+        })
+    }
+
+    async deleteSale(req: FastifyRequest<{Params: {id: string}}>, reply: FastifyReply) {
+        const {id} = req.params
+
+        await salesService.deleteSale(id)
+
+        return reply.code(200).send({
+            status: 'success',
+            message: 'Sale deleted'
+        })
+    }
 }
 
 export const salesController = new SalesController()
